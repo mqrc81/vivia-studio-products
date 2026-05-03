@@ -3,3 +3,4 @@
 /run*/**
 .idea
 .venv
+!stamina/products_color_map.csv
