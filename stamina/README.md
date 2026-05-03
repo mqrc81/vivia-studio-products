@@ -20,7 +20,7 @@ eating.csv / oficina.csv / personal-care.csv   # category files to migrate
 Run once. Add extra encoded-ID source files as additional arguments if available.
 
 ```bash
-python parse_products.py products.csv [extra_source.csv ...]
+python parse_products.py products.csv
 ```
 
 Produces `products_color_map.csv` (used in Step 3).
