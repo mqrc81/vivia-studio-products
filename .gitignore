@@ -1,6 +1,6 @@
 *.csv
 *.json
-/run*/**
+/archives
 .idea
 .venv
-!stamina/products_color_map.csv
+!/stamina/products_color_map.csv

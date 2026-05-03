@@ -1,4 +1,4 @@
-# WooCommerce Migration Scripts
+# STAMINA Migration Scripts
 
 ## Step 1 — Build the color map
 
@@ -24,10 +24,10 @@ python make_variations.py products.csv output.csv TodoPrecios.csv images-and-cat
 
 ## Step 3 — Migrate a product category
 
-Prerequisites: `products-input.csv`, `images-and-categories.csv`, `products_color_map.csv`
+Prerequisites: `input.csv`, `images-and-categories.csv`, `products_color_map.csv`
 
 ```bash
-python migrate_category.py products-input.csv images-and-categories.csv products_color_map.csv
+python migrate_category.py input.csv images-and-categories.csv products_color_map.csv
 ```
 
-Produces `products-input_woo_output.csv` and `products-input_woo_output_errors.csv`.
+Produces `input_woo_output.csv` and `input_woo_output_errors.csv`.
