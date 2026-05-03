@@ -1,33 +1,20 @@
 # WooCommerce Migration Scripts
 
-## Files required in the same directory
-
-```
-load_prices.py
-make_variations.py
-migrate_category.py
-parse_products.py
-products.csv                  # encoded-ID source (BA9092... format)
-images-and-categories.csv     # WooCommerce export with images and categories
-TodoPrecios.csv               # price table
-eating.csv / oficina.csv / personal-care.csv   # category files to migrate
-```
-
----
-
 ## Step 1 — Build the color map
 
-Run once. Add extra encoded-ID source files as additional arguments if available.
+Prerequisites: `products.csv` (encoded-ID format)
 
 ```bash
-python parse_products.py products.csv
+python parse_products.py products.csv [extra_source.csv ...]
 ```
 
-Produces `products_color_map.csv` (used in Step 3).
+Produces `products_color_map.csv`.
 
 ---
 
-## Step 2 — Build the WooCommerce variations CSV (existing pipeline)
+## Step 2 — Build the WooCommerce variations CSV
+
+Prerequisites: `products.csv`, `TodoPrecios.csv`, `images-and-categories.csv`
 
 ```bash
 python make_variations.py products.csv output.csv TodoPrecios.csv images-and-categories.csv
@@ -37,14 +24,10 @@ python make_variations.py products.csv output.csv TodoPrecios.csv images-and-cat
 
 ## Step 3 — Migrate a product category
 
-Run once per category file.
+Prerequisites: `products-input.csv`, `images-and-categories.csv`, `products_color_map.csv`
 
 ```bash
-python migrate_category.py eating.csv images-and-categories.csv products_color_map.csv eating_output.csv
-python migrate_category.py oficina.csv images-and-categories.csv products_color_map.csv oficina_output.csv
-python migrate_category.py personal-care.csv images-and-categories.csv products_color_map.csv personal-care_output.csv
+python migrate_category.py products-input.csv images-and-categories.csv products_color_map.csv
 ```
 
-Each run produces:
-- `<output>.csv` — WooCommerce import file
-- `<output>_errors.csv` — missing images, prices, and color map gaps
+Produces `products-input_woo_output.csv` and `products-input_woo_output_errors.csv`.
